@@ -59,14 +59,15 @@ new WebTorrent().add(usp.get("url"), function(torrent) {
             return file.name.endsWith('.webm')
         });
         
-        (({mp4:mp4,webm:webm})[vtype] || mp4 || webm).renderTo(otherVid)
+        (({mp4:mp4,webm:webm})[vtype] || mp4 || webm).renderTo(otherVid);
+        setTimeout(10,f=>videojs.getAllPlayers()[0].cache_.src=vid.src)
 });
     videojs(vid, {
   controls: true,
   autoplay: false,
   preload: 'auto'
 },function (){
-      videojs.getAllPlayers()[0].cache_.src=vid.src
+      
     });
 </script>
 </body>
