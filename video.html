@@ -25,13 +25,9 @@ vid.poster=usp.get("poster");
 vid.controls=true;
 vid.className="video-js"
 document.body.appendChild(vid)
-videojs(vid, {
-  controls: true,
-  autoplay: false,
-  preload: 'auto'
-});
 
-var otherVid=document.createElement('video')
+
+var otherVid=vid;//document.createElement('video');
 var vtype = (function() {
     function supportsVideoType(type) {
         // Allow user to create shortcuts, i.e. just "webm"
@@ -64,6 +60,11 @@ new WebTorrent().add(usp.get("url"), function(torrent) {
         });
         
         (({mp4:mp4,webm:webm})[vtype] || mp4 || webm).renderTo(otherVid)
+});
+    videojs(vid, {
+  controls: true,
+  autoplay: false,
+  preload: 'auto'
 });
 </script>
 </body>
