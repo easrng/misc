@@ -56,7 +56,7 @@ new WebTorrent().add(usp.get("url"), function(torrent) {
             return file.name.endsWith('.webm')
         });
         
-        (({mp4:mp4,webm:webm})[vtype] || tmp.mp4 || tmp.webm).renderTo(vid)
+        (({mp4:mp4,webm:webm})[vtype] || mp4 || webm).renderTo(vid)
 });
 document.body.appendChild(vid)
 videojs(vid, {
