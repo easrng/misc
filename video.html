@@ -65,8 +65,8 @@ new WebTorrent().add(usp.get("url"), function(torrent) {
   controls: true,
   autoplay: false,
   preload: 'auto'
-},function (player){
-      player.cache_.src=vid.src
+},function (){
+      this.cache_.src=vid.src
     });
 </script>
 </body>
