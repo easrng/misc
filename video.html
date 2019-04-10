@@ -1,4 +1,5 @@
-<html><head><title>Video</title>
+<html><head>
+  <title>OpenTube Video</title>
   <style>
     button.vjs-big-play-button {
     top: calc(50% - 0.75em) !important;
@@ -15,6 +16,7 @@
 </head>
 
 <body><noscript>Javascript is required!</noscript>
+  <script src="https://cdn.jsdelivr.net/npm/webtorrent@0.103.1/webtorrent.min.js" integrity="sha256-RxGlnW6uCj7RynWDfEBjUpRI5K3vLKejc+xMDCgWAFM=" crossorigin="anonymous"></script>
   <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
   <script>var vid=document.createElement("video");
 var vidsrc=document.createElement("source");
@@ -68,4 +70,5 @@ videojs(vid, {
   autoplay: false,
   preload: 'auto'
 });</script>
-</body></html>
+</body>
+</html>
