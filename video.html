@@ -21,9 +21,47 @@ var vidsrc=document.createElement("source");
 vid.appendChild(vidsrc);
 var usp=new URLSearchParams(location.search)
 vid.poster=usp.get("poster");
-vidsrc.src=usp.get("url");
 vid.controls=true;
 vid.className="video-js"
+var vtype = (function() {
+    function supportsVideoType(type) {
+        var video = document.createElement('video')
+        // Allow user to create shortcuts, i.e. just "webm"
+        var formats = {
+            mp4: 'video/mp4; codecs="avc1.42E01E"',
+            webm: 'video/webm; codecs="vp8, vorbis"',
+        };
+        return video.canPlayType(formats[type] || type);
+    }
+    var w = supportsVideoType('webm')
+    var m = supportsVideoType('mp4');
+    if (w) {
+        return 'webm'
+    } else {
+        if (m) {
+            return 'mp4'
+        } else {
+            return null
+        }
+    }
+})();
+
+var client = new WebTorrent()
+
+var torrentId = usp.get("url");
+
+client.add(torrentId, function(torrent) {
+            // Torrents can contain many files. Let's use the .mp4 file
+        var mp4 = torrent.files.find(function(file) {
+            return file.name.endsWith('.mp4')
+        });
+        var webm = torrent.files.find(function(file) {
+            return file.name.endsWith('.webm')
+        });
+        var tmp={mp4:mp4,webm:webm}
+        vid=tmp[vtype]||tmp.mp4||tmp.webm
+        vid.renderTo(vidsrc)
+});
 document.body.appendChild(vid)
 videojs(vid, {
   controls: true,
