@@ -18,9 +18,8 @@
 <body><noscript>Javascript is required!</noscript>
   <script src="https://cdn.jsdelivr.net/npm/webtorrent@0.103.1/webtorrent.min.js" integrity="sha256-RxGlnW6uCj7RynWDfEBjUpRI5K3vLKejc+xMDCgWAFM=" crossorigin="anonymous"></script>
   <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
-  <script>var vid=document.createElement("video");
-// var vidsrc=document.createElement("source");
-// vid.appendChild(vidsrc);
+  <script>
+    var vid=document.createElement("video");
 var usp=new URLSearchParams(location.search)
 vid.poster=usp.get("poster");
 vid.controls=true;
@@ -48,11 +47,7 @@ var vtype = (function() {
     }
 })();
 
-var client = new WebTorrent()
-
-var torrentId = usp.get("url");
-
-client.add(torrentId, function(torrent) {
+new WebTorrent().add(usp.get("url"), function(torrent) {
             // Torrents can contain many files. Let's use the .mp4 file
         var mp4 = torrent.files.find(function(file) {
             return file.name.endsWith('.mp4')
@@ -60,9 +55,8 @@ client.add(torrentId, function(torrent) {
         var webm = torrent.files.find(function(file) {
             return file.name.endsWith('.webm')
         });
-        var tmp={mp4:mp4,webm:webm}
-        vid=tmp[vtype]||tmp.mp4||tmp.webm
-        vid.renderTo(vid)
+        
+        (({mp4:mp4,webm:webm})[vtype] || tmp.mp4 || tmp.webm).renderTo(vid)
 });
 document.body.appendChild(vid)
 videojs(vid, {
