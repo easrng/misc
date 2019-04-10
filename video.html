@@ -24,15 +24,22 @@ var usp=new URLSearchParams(location.search)
 vid.poster=usp.get("poster");
 vid.controls=true;
 vid.className="video-js"
+document.body.appendChild(vid)
+videojs(vid, {
+  controls: true,
+  autoplay: false,
+  preload: 'auto'
+});
+
+var otherVid=document.createElement('video')
 var vtype = (function() {
     function supportsVideoType(type) {
-        var video = document.createElement('video')
         // Allow user to create shortcuts, i.e. just "webm"
         var formats = {
             mp4: 'video/mp4; codecs="avc1.42E01E"',
             webm: 'video/webm; codecs="vp8, vorbis"',
         };
-        return video.canPlayType(formats[type] || type);
+        return otherVid.canPlayType(formats[type] || type);
     }
     var w = supportsVideoType('webm')
     var m = supportsVideoType('mp4');
@@ -56,13 +63,8 @@ new WebTorrent().add(usp.get("url"), function(torrent) {
             return file.name.endsWith('.webm')
         });
         
-        (({mp4:mp4,webm:webm})[vtype] || mp4 || webm).renderTo(vid)
+        (({mp4:mp4,webm:webm})[vtype] || mp4 || webm).renderTo(otherVid)
 });
-document.body.appendChild(vid)
-videojs(vid, {
-  controls: true,
-  autoplay: false,
-  preload: 'auto'
-});</script>
+</script>
 </body>
 </html>
