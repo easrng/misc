@@ -19,8 +19,8 @@
   <script src="https://cdn.jsdelivr.net/npm/webtorrent@0.103.1/webtorrent.min.js" integrity="sha256-RxGlnW6uCj7RynWDfEBjUpRI5K3vLKejc+xMDCgWAFM=" crossorigin="anonymous"></script>
   <script src='https://vjs.zencdn.net/7.4.1/video.js'></script>
   <script>var vid=document.createElement("video");
-var vidsrc=document.createElement("source");
-vid.appendChild(vidsrc);
+// var vidsrc=document.createElement("source");
+// vid.appendChild(vidsrc);
 var usp=new URLSearchParams(location.search)
 vid.poster=usp.get("poster");
 vid.controls=true;
@@ -62,7 +62,7 @@ client.add(torrentId, function(torrent) {
         });
         var tmp={mp4:mp4,webm:webm}
         vid=tmp[vtype]||tmp.mp4||tmp.webm
-        vid.renderTo(vidsrc)
+        vid.renderTo(vid)
 });
 document.body.appendChild(vid)
 videojs(vid, {
