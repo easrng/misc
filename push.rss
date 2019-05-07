@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>Push Notifications Feed</title>
+<link>https://easrng.github.io/misc/push.rss</link>
+<description>A Feed for my push service.</description>
+<item>
+<title>Hello World!</title>
+<pubDate>Tue, 07 May 19 19:25:38 +0200</pubDate>
+<description>Test Notification</description>
+</item>
+</channel>
+</rss>
