@@ -35,4 +35,10 @@
 <description>Test Notification AGAIN!</description>
 </item>
 </channel>
+    <item>
+<title>Hi my other other peeps!</title>
+<pubDate>Fri, 02 Aug 2019 07:28:12 -0700</pubDate>
+<description>Test Notification AGAINx2!</description>
+</item>
+</channel>
 </rss>
